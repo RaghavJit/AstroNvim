@@ -50,9 +50,9 @@ maps.n["<leader>pl"] = { "<cmd>AstroChangelog<cr>", desc = "AstroNvim Changelog"
 -- Manage Buffers
 maps.n["<leader>c"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer" }
 maps.n["<leader>C"] = { function() require("astronvim.utils.buffer").close(0, true) end, desc = "Force close buffer" }
-maps.n["<C-]>"] =
+maps.n["<A-]>"] =
   { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" }
-maps.n["<C-[>"] = {
+maps.n["<A-[>"] = {
   function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
   desc = "Previous buffer",
 }
@@ -209,10 +209,10 @@ end
 
 -- Smart Splits
 if is_available "smart-splits.nvim" then
-  maps.n["<C-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
-  maps.n["<C-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
-  maps.n["<C-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
-  maps.n["<C-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
+  maps.n["<A-Left>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
+  maps.n["<A-Down>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
+  maps.n["<A-Up>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
+  maps.n["<A-Right>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
   maps.n["<C-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" }
   maps.n["<C-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" }
   maps.n["<C-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" }
@@ -413,10 +413,10 @@ maps.v["<S-Tab>"] = { "<gv", desc = "Unindent line" }
 maps.v["<Tab>"] = { ">gv", desc = "Indent line" }
 
 -- Improved Terminal Navigation
-maps.t["<C-h>"] = { "<cmd>wincmd h<cr>", desc = "Terminal left window navigation" }
-maps.t["<C-j>"] = { "<cmd>wincmd j<cr>", desc = "Terminal down window navigation" }
-maps.t["<C-k>"] = { "<cmd>wincmd k<cr>", desc = "Terminal up window navigation" }
-maps.t["<C-l>"] = { "<cmd>wincmd l<cr>", desc = "Terminal right window navigation" }
+maps.t["<A-a>"] = { "<cmd>wincmd h<cr>", desc = "Terminal left window navigation" }
+maps.t["<A-s>"] = { "<cmd>wincmd j<cr>", desc = "Terminal down window navigation" }
+maps.t["<A-w>"] = { "<cmd>wincmd k<cr>", desc = "Terminal up window navigation" }
+maps.t["<A-d>"] = { "<cmd>wincmd l<cr>", desc = "Terminal right window navigation" }
 
 maps.n["<leader>u"] = sections.u
 -- Custom menu for modification of the user experience

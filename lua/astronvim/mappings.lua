@@ -25,7 +25,7 @@ maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor do
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
-maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
+maps.n["<leader>n"] = { "<cmd>Setup<cr>", desc = "New File" }
 maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
 maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
@@ -66,9 +66,9 @@ maps.n["<b"] = {
 }
 
 maps.n["<leader>b"] = sections.b
-maps.n["<leader>bc"] =
+maps.n["<leader>bC"] =
   { function() require("astronvim.utils.buffer").close_all(true) end, desc = "Close all buffers except current" }
-maps.n["<leader>bC"] = { function() require("astronvim.utils.buffer").close_all() end, desc = "Close all buffers" }
+maps.n["<leader>bc"] = { function() require("astronvim.utils.buffer").close_all() end, desc = "Close all buffers" }
 maps.n["<leader>bb"] = {
   function()
     require("astronvim.utils.status.heirline").buffer_picker(function(bufnr) vim.api.nvim_win_set_buf(0, bufnr) end)
@@ -163,10 +163,24 @@ end
 -- NeoTree
 if is_available "neo-tree.nvim" then
   maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+  maps.t["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
   maps.n["<leader>1"] = { "<cmd>Neotree filesystem<cr>", desc = "Toggle Explorer" }
   maps.n["<leader>2"] = { "<cmd>Neotree buffers<cr>", desc = "Toggle Explorer" }
   maps.n["<leader>3"] = { "<cmd>Neotree git_status<cr>", desc = "Toggle Explorer" }
+  maps.t["<leader>1"] = { "<cmd>Neotree filesystem<cr>", desc = "Toggle Explorer" }
+  maps.t["<leader>2"] = { "<cmd>Neotree buffers<cr>", desc = "Toggle Explorer" }
+  maps.t["<leader>3"] = { "<cmd>Neotree git_status<cr>", desc = "Toggle Explorer" }
   maps.n["<leader>o"] = {
+    function()
+      if vim.bo.filetype == "neo-tree" then
+        vim.cmd.wincmd "p"
+      else
+        vim.cmd.Neotree "focus"
+      end
+    end,
+    desc = "Toggle Explorer Focus",
+  }
+  maps.t["<leader>o"] = {
     function()
       if vim.bo.filetype == "neo-tree" then
         vim.cmd.wincmd "p"
@@ -213,8 +227,14 @@ if is_available "smart-splits.nvim" then
   maps.n["<A-Down>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
   maps.n["<A-Up>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
   maps.n["<A-Right>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
+  maps.t["<A-Left>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
+  maps.t["<A-Down>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
+  maps.t["<A-Up>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
+  maps.t["<A-Right>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
   maps.n["<C-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" }
   maps.n["<C-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" }
+  maps.t["<C-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" }
+  maps.t["<C-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" }
   maps.n["<C-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" }
   maps.n["<C-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" }
 else
@@ -335,6 +355,7 @@ if is_available "toggleterm.nvim" then
   if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
   maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
   maps.n["<leader>tt"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
+  maps.t["<leader>tt"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
   maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
   maps.n["<F7>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
   maps.t["<F7>"] = maps.n["<F7>"]

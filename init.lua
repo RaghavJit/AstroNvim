@@ -6,6 +6,19 @@ vim.opt.softtabstop = 0
 vim.opt.expandtab = true
 vim.opt.swapfile = false
 
+local function setup_nvim()
+  print("Welcome!")
+  vim.cmd("enew")
+  vim.cmd("Neotree<cr>")
+  vim.cmd("ToggleTerm size=10 direction=horizontal")
+end
+
+vim.api.nvim_create_user_command("Setup", setup_nvim, {
+  nargs = 0,
+  bang = false,
+  register = false,
+})
+
 for _, source in ipairs {
   "astronvim.bootstrap",
   "astronvim.options",

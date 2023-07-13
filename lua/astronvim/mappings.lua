@@ -429,6 +429,22 @@ if is_available "nvim-ufo" then
   maps.n["zp"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold" }
 end
 
+if is_available "mini.map" then
+  maps.n["<leader>m"] = sections.m
+  maps.n["<leader>mc"] = { function() require("mini.map").close() end, desc = "Close map" }
+  maps.n["<leader>mf"] = { function() require("mini.map").toggle_focus() end, desc = "Toggle focus" }
+  maps.n["<leader>mo"] = { function() require("mini.map").open() end, desc = "Open map" }
+  maps.n["<leader>mr"] = { function() require("mini.map").refresh() end, desc = "Refresh map" }
+  maps.n["<leader>ms"] = { function() require("mini.map").toggle_side() end, desc = "Toggle side" }
+  maps.n["<leader>mt"] = { function() require("mini.map").toggle() end, desc = "Toggle" }
+-- vim.keymap.set('n', '<Leader>mc', MiniMap.close)
+-- vim.keymap.set('n', '<Leader>mf', MiniMap.toggle_focus)
+-- vim.keymap.set('n', '<Leader>mo', MiniMap.open)
+-- vim.keymap.set('n', '<Leader>mr', MiniMap.refresh)
+-- vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side)
+-- vim.keymap.set('n', '<Leader>mt', MiniMap.toggle) 
+end 
+
 -- Stay in indent mode
 maps.v["<S-Tab>"] = { "<gv", desc = "Unindent line" }
 maps.v["<Tab>"] = { ">gv", desc = "Indent line" }
